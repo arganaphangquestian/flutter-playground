@@ -1,3 +1,4 @@
+[![build](https://github.com/arganaphangquestian/flutter-playground/actions/workflows/build.yaml/badge.svg?branch=cicd)](https://github.com/arganaphangquestian/flutter-playground/actions/workflows/build.yaml)
 # flutter_playground
 
 A new Flutter project.
