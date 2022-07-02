@@ -4,19 +4,7 @@ on:
     branches:
       - cicd
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v3
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-      - name: flutter pub get
-        run: flutter pub get
-      - name: flutter test
-        run: flutter test
-  build:
+  test-build:
     if: job.test.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -26,6 +14,12 @@ jobs:
         with:
           channel: 'stable'
       - name: flutter pub get
+        id: flutter-get
         run: flutter pub get
+      - name: flutter test
+        id: flutter-test
+        run: flutter test
       - name: Build APK
+        id: flutter-build
+        if: steps.flutter-test.outcome == 'success'
         run: flutter build apk --release --build-number=$GITHUB_RUN_NUMBER
