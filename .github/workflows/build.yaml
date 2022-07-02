@@ -1,0 +1,19 @@
+name: build
+on:
+  push:
+    branches:
+      - cicd
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - name: flutter pub get
+        run: flutter pub get
+      - name: Build APK
+        run: flutter build apk --release --build-number=$GITHUB_RUN_NUMBER
