@@ -30,7 +30,10 @@ class HomePage extends GetView<HomeController> {
       ),
       body: Center(
         child: Obx(
-          () => Text('Name ${Get.find<MainController>().user.value?.name}'),
+          () => Text(
+            'Name ${Get.find<MainController>().user.value?.name}\nGet from local data',
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     );
