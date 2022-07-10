@@ -30,14 +30,4 @@ class RepositoryImpl implements Repository {
       return RemoteState.error(message: e.message);
     }
   }
-
-  @override
-  Future<RemoteState<String>> refreshToken() async {
-    try {
-      final res = await _remote.refreshToken();
-      return RemoteState.success(data: res);
-    } on DatasourceException catch (e) {
-      return RemoteState.error(message: e.message);
-    }
-  }
 }

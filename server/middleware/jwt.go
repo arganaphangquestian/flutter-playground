@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	REALM  = "authentication application"
+	REALM  = `"authentication application"`
 	SECRET = "789023jkdew89012mn!2pefw012lmas"
 )
 
@@ -22,7 +22,7 @@ func Middleware() (*jwt.GinJWTMiddleware, error) {
 		Realm:       REALM,
 		IdentityKey: identity,
 		Key:         []byte(SECRET),
-		Timeout:     time.Minute * 5,
+		Timeout:     time.Minute,             // SET TO 1 Minute only
 		MaxRefresh:  time.Hour * 24 * 30 * 3, // FOR REFRESH TOKEN (30 Days * 3), DEFAULT 0 WHICH MEAN THIS JWT NOT REFRESHABLE
 		TokenLookup: "header: Authorization, cookie: jwt",
 		TimeFunc:    time.Now,

@@ -4,7 +4,6 @@ import 'package:flutter_playground/data/datasource/remote_datasource.dart';
 import 'package:flutter_playground/data/repository/repository_impl.dart';
 import 'package:flutter_playground/domain/usecases/login_usecase.dart';
 import 'package:flutter_playground/domain/usecases/me_usecase.dart';
-import 'package:flutter_playground/domain/usecases/refresh_token_usecase.dart';
 import 'package:flutter_playground/main_controller.dart';
 import 'package:flutter_playground/page/home/home_controller.dart';
 import 'package:flutter_playground/page/login/login_controller.dart';
@@ -37,14 +36,15 @@ Future<void> setup() async {
   Get.lazyPut<MeUseCase>(
     () => MeUseCase(Get.find<RepositoryImpl>()),
   );
-  Get.lazyPut<RefreshTokenUseCase>(
-    () => RefreshTokenUseCase(Get.find<RepositoryImpl>()),
-  );
   // Get.lazyPut<RegisterUseCase>(() => RegisterUseCase());
   // Controllers
   Get.put<MainController>(MainController());
   Get.lazyPut<HomeController>(() => HomeController());
-  Get.lazyPut<LoginController>(() => LoginController(Get.find<LoginUseCase>()));
-  Get.lazyPut<ProfileController>(() => ProfileController());
+  Get.lazyPut<LoginController>(
+    () => LoginController(Get.find<LoginUseCase>()),
+  );
+  Get.lazyPut<ProfileController>(
+    () => ProfileController(Get.find<MeUseCase>()),
+  );
   Get.lazyPut<SplashController>(() => SplashController());
 }
